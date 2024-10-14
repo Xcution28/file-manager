@@ -2,6 +2,7 @@ import { createInterface } from 'readline';
 import { homedir } from 'os';
 import * as navigation from './src/commands/navigation.js';
 import * as basicOperations from './src/commands/basicOperations.js';
+import * as osInfo from './src/commands/osInfo.js';
 
 const rl = createInterface({
     input: process.stdin,
@@ -59,6 +60,9 @@ function handleCommand(command, args) {
             break;
         case 'rm':
             basicOperations.rm(args[0]);
+            break;
+        case 'os':
+            osInfo.os(args);
             break;
     }
 }
