@@ -1,16 +1,19 @@
 import { resolve } from 'path';
 import { readdir, stat } from 'fs';
+import * as basicOperations from './basicOperations.js';
 
 let currentDir;
 
 export function setCurrentDir(dir) {
     currentDir = dir;
+    basicOperations.setCurrentDir(currentDir);
 }
 
 export function up() {
     const parentDir = resolve(currentDir, '..');
     if (parentDir !== currentDir) {
         currentDir = parentDir;
+        basicOperations.setCurrentDir(currentDir);
     }
     console.log(`You are currently in ${currentDir}`);
 }
@@ -22,6 +25,7 @@ export function cd(path) {
             console.log('Operation failed');
         } else {
             currentDir = newPath;
+            basicOperations.setCurrentDir(currentDir);
             console.log(`You are currently in ${currentDir}`);
         }
     });

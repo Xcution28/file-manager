@@ -1,6 +1,7 @@
 import { createInterface } from 'readline';
 import { homedir } from 'os';
 import * as navigation from './src/commands/navigation.js';
+import * as basicOperations from './src/commands/basicOperations.js';
 
 const rl = createInterface({
     input: process.stdin,
@@ -18,6 +19,7 @@ console.log(`Welcome to the File Manager, ${username}!`);
 console.log(`You are currently in ${currentDir}`);
 
 navigation.setCurrentDir(currentDir);
+basicOperations.setCurrentDir(currentDir);
 
 rl.on('line', (input) => {
     const [command, ...args] = input.trim().split(' ');
@@ -39,6 +41,24 @@ function handleCommand(command, args) {
             break;
         case 'ls':
             navigation.ls();
+            break;
+        case 'cat':
+            basicOperations.cat(args[0]);
+            break;
+        case 'add':
+            basicOperations.add(args[0]);
+            break;
+        case 'rn':
+            basicOperations.rn(args[0], args[1]);
+            break;
+        case 'cp':
+            basicOperations.cp(args[0], args[1]);
+            break;
+        case 'mv':
+            basicOperations.mv(args[0], args[1]);
+            break;
+        case 'rm':
+            basicOperations.rm(args[0]);
             break;
     }
 }
