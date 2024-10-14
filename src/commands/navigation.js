@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { readdir, stat } from 'fs';
 import * as basicOperations from './basicOperations.js';
+import * as hash from './hash.js';
 
 let currentDir;
 
@@ -14,6 +15,7 @@ export function up() {
     if (parentDir !== currentDir) {
         currentDir = parentDir;
         basicOperations.setCurrentDir(currentDir);
+        hash.setCurrentDir(currentDir);
     }
     console.log(`You are currently in ${currentDir}`);
 }
@@ -26,6 +28,7 @@ export function cd(path) {
         } else {
             currentDir = newPath;
             basicOperations.setCurrentDir(currentDir);
+            hash.setCurrentDir(currentDir);
             console.log(`You are currently in ${currentDir}`);
         }
     });
